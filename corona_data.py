@@ -31,7 +31,7 @@ def pageNum(s):
 
 
 #Get the PDF
-url = "https://www.gob.mx/cms/uploads/attachment/file/544029/Tabla_casos_positivos_COVID-19_resultado_InDRE_2020.03.28.pdf"
+url = "https://www.gob.mx/cms/uploads/attachment/file/544086/Tabla_casos_positivos_COVID-19_resultado_InDRE_2020.03.29.pdf"
 file = requests.get(url).content
 
 # #Create TEMP path
