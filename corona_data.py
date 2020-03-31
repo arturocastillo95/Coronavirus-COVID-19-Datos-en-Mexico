@@ -5,6 +5,7 @@ import requests
 import pandas as pd
 import csv
 from shutil import rmtree
+import time
 
 def createPath(s):
     try:  
@@ -29,9 +30,10 @@ def pageNum(s):
 		return int(s[i:y])
 	return int(s[i])
 
+start_time = time.time()
 
 #Get the PDF
-url = "https://www.gob.mx/cms/uploads/attachment/file/544086/Tabla_casos_positivos_COVID-19_resultado_InDRE_2020.03.29.pdf"
+url = "https://www.gob.mx/cms/uploads/attachment/file/544266/Tabla_casos_positivos_COVID-19_resultado_InDRE_2020.03.30.pdf"
 file = requests.get(url).content
 
 # #Create TEMP path
@@ -43,15 +45,16 @@ tempPath = myPath + "/TEMP/"
 with open(tempPath + "current.pdf", "wb") as f:
 	f.write(file)
 
-#PDF to CSV Files
+# PDF to CSV Files
+# tables = camelot.read_pdf(tempPath + "current.pdf", pages="1-end", flavor="stream", edge_tol=50)
 tables = camelot.read_pdf(tempPath + "current.pdf", pages="1-end")
 tables.export(tempPath + "cases.csv", f='csv', compress=False)
 
-#Collect and sort all CSV file names
+# Collect and sort all CSV file names
 all_files = glob.glob(os.path.join(tempPath, "cases-page-*-table-1.csv"))
 all_files.sort(key=pageNum)
 
-#Get the header of the table from the first file
+# Get the header of the table from the first file
 with open(all_files[0], "r") as doc:
 	read = csv.reader(doc)
 	header = next(read)
@@ -69,3 +72,5 @@ finaldf.to_csv( "merged.csv", index=False, encoding='utf-8-sig')
 
 #Delete temp files
 deletePath(myPath + "/TEMP")
+
+print("--- %s seconds ---" % (time.time() - start_time))
