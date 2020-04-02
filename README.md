@@ -8,3 +8,4 @@ El propósito de proveer esta información es capturar los datos en un formato q
 
 https://www.gob.mx/salud/documentos/coronavirus-covid-19-comunicado-tecnico-diario-238449
 
+2
