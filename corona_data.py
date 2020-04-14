@@ -33,7 +33,7 @@ def pageNum(s):
 start_time = time.time()
 
 #Get the PDF
-url = "https://www.gob.mx/cms/uploads/attachment/file/546216/Tabla_casos_positivos_COVID-19_resultado_InDRE_2020.04.11.pdf"
+url = "https://www.gob.mx/cms/uploads/attachment/file/546234/Tabla_casos_positivos_COVID-19_resultado_InDRE_2020.04.12.pdf"
 file = requests.get(url).content
 
 # #Create TEMP path
